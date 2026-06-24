@@ -924,7 +924,7 @@ editorHandle.addEventListener("click", openEditor);
 cvDockClose.addEventListener("click", closeEditor);
 
 /* ---- Animated CV editing: diff -> highlight the changed region -> typewriter it in ---- */
-let typeTimer = null, pendingMark = null;
+let typeTimer = null, pendingMark = null, typingTarget = null;
 
 /** Longest common prefix/suffix -> the single changed middle region. */
 function diffRegion(oldStr, newStr) {
@@ -945,23 +945,36 @@ function settlePending() {
 /** Render newCv into the editor; type the changed region into a live highlight. */
 function renderCvChange(oldCv, newCv) {
   clearInterval(typeTimer);
+  typingTarget = newCv;                          // remember the full target until the anim finishes
   const { before, changed, after } = diffRegion(oldCv, newCv);
-  if (!changed) { setDockCv(newCv); return; }
+  if (!changed) { setDockCv(newCv); typingTarget = null; return; }
   cvDockArea.textContent = "";
   cvDockArea.appendChild(document.createTextNode(before));
   const mk = document.createElement("mark"); mk.className = "cv-change typing";
   cvDockArea.appendChild(mk);
   cvDockArea.appendChild(document.createTextNode(after));
   pendingMark = mk;
-  if (reduceMotion) { mk.textContent = changed; mk.classList.remove("typing"); return; }
+  if (reduceMotion) { mk.textContent = changed; mk.classList.remove("typing"); typingTarget = null; return; }
   let i = 0;
   const step = Math.max(1, Math.round(changed.length / 110));   // cap total frames
   typeTimer = setInterval(() => {
     i = Math.min(changed.length, i + step);
     mk.textContent = changed.slice(0, i);
     mk.scrollIntoView({ block: "nearest" });
-    if (i >= changed.length) { clearInterval(typeTimer); mk.classList.remove("typing"); }
+    if (i >= changed.length) { clearInterval(typeTimer); mk.classList.remove("typing"); typingTarget = null; }
   }, 16);
+}
+
+/** Complete any in-flight typewriter immediately so the editor holds the FULL composed CV.
+ *  Without this, code that reads the editor mid-animation (e.g. exitTailoring) would capture
+ *  only the un-typed common prefix (the name). No-op when nothing is animating, so genuine
+ *  manual editor edits are preserved. */
+function flushTypewriter() {
+  if (typingTarget != null) {
+    clearInterval(typeTimer);
+    setDockCv(typingTarget);                      // render the complete target into the editor
+    typingTarget = null;
+  }
 }
 
 // Hebrew labels for the seniority levels coming from the profile.
@@ -1385,6 +1398,7 @@ async function enterTailoring(src, job) {
 
 function exitTailoring(src) {
   tailorState.active = false;
+  flushTypewriter();   // finish any in-flight rewrite so the editor holds the FULL CV before we read it
   settlePending();
   if (getDockCv().trim()) cvState.cv_text = getDockCv();   // keep edits
   closeEditor();                       // close the LEFT editor; profile (right) stays open
