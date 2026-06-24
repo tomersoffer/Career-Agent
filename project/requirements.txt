@@ -1,0 +1,15 @@
+flask
+# --- scientific stack PINNED to the versions that created the joblib pickles ---
+# (tfidf_vectorizer / kmeans_model / feature_scaler were saved with sklearn 1.5.1 on
+#  numpy 1.26.x; unpickling under a different major version risks invalid results.)
+numpy==1.26.4
+scipy==1.13.1
+scikit-learn==1.5.1
+pandas==2.2.2
+joblib==1.4.2
+anthropic
+apify-client
+python-dotenv
+pypdf
+python-docx
+gunicorn
