@@ -392,6 +392,11 @@ def cv_tailor():
         section_index = 0
     n_sections = len(cv_tailor_mod.prompts.TAILOR_SECTIONS)
     is_compose_turn = section_index >= n_sections    # end-of-walk auto-compose (no user msg)
+    # Cached job-specific gap analysis (computed on the opener, replayed each turn so the
+    # semantic LLM gap pass runs once per session). Only trust a well-formed object.
+    gaps = data.get("gaps")
+    if not (isinstance(gaps, dict) and ("covered" in gaps or "missing" in gaps)):
+        gaps = None
 
     if not cv_text:
         return jsonify({"error": "חסר טקסט קורות חיים"}), 400
@@ -401,7 +406,7 @@ def cv_tailor():
     try:
         result = cv_tailor_mod.tailor_turn(
             cv_text, job, history, user_msg, ag.claude_client, ag.LLM_MODEL,
-            composed=composed, has_cv=has_cv, section_index=section_index,
+            composed=composed, has_cv=has_cv, section_index=section_index, gaps=gaps,
         )
     except Exception as exc:
         traceback.print_exc()                        # detail to server log, not the client

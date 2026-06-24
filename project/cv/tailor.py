@@ -52,6 +52,7 @@ def tailor_turn(
     composed: bool = False,
     has_cv: bool = False,
     section_index: int = 0,
+    gaps: dict = None,
 ) -> dict:
     """Run one collaborative-editor turn for CV tailoring.
 
@@ -90,11 +91,17 @@ def tailor_turn(
                 "section_done": False, "next_section_index": section_index, "total_sections": total}
 
     # ------------------------------------------------------------------
-    # Ground the model with deterministic JD keyword analysis (no hallucination)
+    # Ground the model with a JOB-SPECIFIC gap analysis: which of THIS job's
+    # requirements the CV already evidences vs which are genuinely missing.
+    # Computed once per tailoring session and cached by the caller (passed back
+    # as `gaps`); recomputed here only when absent. analyze_gaps falls back to the
+    # deterministic jd_keywords matcher when the LLM is unavailable.
     # ------------------------------------------------------------------
-    from cv import jd_keywords as jdkw
-
-    mh = jdkw.must_haves(cv_text, job, top_k=8)
+    if isinstance(gaps, dict) and ("covered" in gaps or "missing" in gaps):
+        mh = {"covered": gaps.get("covered", []), "missing": gaps.get("missing", [])}
+    else:
+        from cv import gap as cv_gap
+        mh = cv_gap.analyze_gaps(cv_text, job, claude_client, model, top_k=8)
     covered = mh.get("covered", [])
     missing = mh.get("missing", [])
 
@@ -178,11 +185,13 @@ def tailor_turn(
             "section_done":       section_done,
             "next_section_index": next_idx,
             "total_sections":     total,
+            "gaps":               mh,   # cache on the client -> one gap analysis per session
         }
 
     # Fallback if JSON parsing failed
     return {"reply": str(raw) if raw else "שגיאה בעיבוד התגובה.", "proposed_cv": None,
-            "done": False, "section_done": False, "next_section_index": si, "total_sections": total}
+            "done": False, "section_done": False, "next_section_index": si, "total_sections": total,
+            "gaps": mh}
 
 
 # ---------------------------------------------------------------------------

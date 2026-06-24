@@ -163,21 +163,13 @@ function addUser(src, text) {
   w.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
   threads[src].appendChild(w); scrollDown();
 }
-const THINKING = {
-  dataset: ["מאתר משרות עבורך…", "מנתח התאמות ובודק סיכונים…", "מכין המלצות להגשה…"],
-  scrape:  ["מאתר משרות חיות בישראל…", "בודק רמת תחרותיות…", "מכין המלצות להגשה…"],
-};
 function addThinking(src) {
   const w = document.createElement("div");
   w.className = "msg agent thinking";
-  w.innerHTML = `<div class="bubble"><span class="ttext"></span><span class="tdots"><span></span><span></span><span></span></span></div>`;
-  const phrases = THINKING[src] || THINKING.dataset;
-  const textEl = w.querySelector(".ttext");
-  textEl.textContent = phrases[0];
-  let i = 0;
-  const timer = setInterval(() => { i = (i + 1) % phrases.length; textEl.textContent = phrases[i]; }, 1600);
+  // Animation only — no rotating status text.
+  w.innerHTML = `<div class="bubble"><span class="tdots"><span></span><span></span><span></span></span></div>`;
   threads[src].appendChild(w); scrollDown();
-  return { stop: () => clearInterval(timer), remove: () => { clearInterval(timer); w.remove(); } };
+  return { stop: () => {}, remove: () => { w.remove(); } };
 }
 function addAgent(src, reply, cardsHtml) {
   const w = document.createElement("div");
@@ -1296,7 +1288,7 @@ function proactiveAfterEdit(changed, searchChanged) {
 
 // Tailoring mode: while active, the composer talks to /api/cv-tailor about one focused job.
 const tailorState = { active: false, job: null, history: [], composed: false,
-                      sectionIndex: 0, hasCv: false };
+                      sectionIndex: 0, hasCv: false, gaps: null };
 
 // "✨ שפר קו״ח למשרה זו" buttons are injected into dynamic job cards — delegate from the stage.
 stage.addEventListener("click", (e) => {
@@ -1350,6 +1342,7 @@ function handleTailorResponse(src, data) {
     cvDockBanner.hidden = false;
     tailorState.composed = true;   // a full rewrite now exists -> later turns are AMEND
   }
+  if (data.gaps) tailorState.gaps = data.gaps;   // cache the job-specific gap analysis (computed once)
   if (typeof data.next_section_index === "number") tailorState.sectionIndex = data.next_section_index;
   const total = data.total_sections || 0;
   if (!tailorState.composed && total && tailorState.sectionIndex >= total) {
@@ -1365,7 +1358,7 @@ async function autoComposeCv(src) {
     const data = await postJSON("/api/cv-tailor", {
       cv_text: getDockCv(), job: tailorState.job,
       history: tailorState.history, user_msg: "",   // full walk -> COMPOSE needs every fact
-      has_cv: tailorState.hasCv, section_index: tailorState.sectionIndex });
+      has_cv: tailorState.hasCv, section_index: tailorState.sectionIndex, gaps: tailorState.gaps });
     t.remove();
     handleTailorResponse(src, data);
   } catch { t.remove(); addAgent(src, "לא ניתן להתחבר לשרת.", ""); }
@@ -1378,6 +1371,7 @@ async function enterTailoring(src, job) {
   tailorState.composed = false;
   tailorState.sectionIndex = 0;
   tailorState.hasCv = !!cvState.hasRealCv;
+  tailorState.gaps = null;             // fresh job -> recompute the gap analysis on the opener
   pendingMark = null;
   setDockCv(cvState.cv_text || "");
   cvDockJob.textContent = [job.title, job.company].filter(Boolean).join(" · ");
@@ -1445,7 +1439,7 @@ async function submitTailorTurn(src, prompt) {
       cv_text: getDockCv(), job: tailorState.job,
       history: tailorState.history.slice(0, -1), user_msg: prompt,
       composed: tailorState.composed,
-      has_cv: tailorState.hasCv, section_index: tailorState.sectionIndex,
+      has_cv: tailorState.hasCv, section_index: tailorState.sectionIndex, gaps: tailorState.gaps,
     }, signal);
     t.remove();
     handleTailorResponse(src, data);

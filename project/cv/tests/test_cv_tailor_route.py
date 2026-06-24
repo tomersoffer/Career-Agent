@@ -31,8 +31,8 @@ def test_composed_flag_is_forwarded(monkeypatch):
 def test_section_fields_forwarded(monkeypatch):
     seen = {}
     def fake_turn(cv_text, job, history, user_msg, client, model,
-                  composed=False, has_cv=False, section_index=0):
-        seen.update(has_cv=has_cv, section_index=section_index)
+                  composed=False, has_cv=False, section_index=0, gaps=None, **kw):
+        seen.update(has_cv=has_cv, section_index=section_index, gaps=gaps)
         return {"reply": "?", "proposed_cv": None, "done": False,
                 "section_done": False, "next_section_index": section_index, "total_sections": 6}
     monkeypatch.setattr(tailor, "tailor_turn", fake_turn)
@@ -55,6 +55,33 @@ def test_compose_turn_allowed_without_user_msg(monkeypatch):
                                        "user_msg": "", "section_index": n})
     assert r.status_code == 200
     assert r.get_json()["proposed_cv"] == "FULL CV"
+
+
+def test_wellformed_gaps_forwarded(monkeypatch):
+    seen = {}
+    def fake_turn(cv_text, job, history, user_msg, client, model, gaps=None, **kw):
+        seen["gaps"] = gaps
+        return {"reply": "ok", "proposed_cv": None, "done": False}
+    monkeypatch.setattr(tailor, "tailor_turn", fake_turn)
+    c = _client()
+    g = {"covered": ["SQL"], "missing": ["Airflow"]}
+    r = c.post("/api/cv-tailor", json={"cv_text": "CV", "job": {"title": "Analyst"},
+                                       "user_msg": "תשובה", "gaps": g})
+    assert r.status_code == 200
+    assert seen["gaps"] == g                 # cached gap analysis replayed to the controller
+
+
+def test_malformed_gaps_dropped(monkeypatch):
+    seen = {}
+    def fake_turn(cv_text, job, history, user_msg, client, model, gaps=None, **kw):
+        seen["gaps"] = gaps
+        return {"reply": "ok", "proposed_cv": None, "done": False}
+    monkeypatch.setattr(tailor, "tailor_turn", fake_turn)
+    c = _client()
+    r = c.post("/api/cv-tailor", json={"cv_text": "CV", "job": {"title": "Analyst"},
+                                       "user_msg": "תשובה", "gaps": "not-a-dict"})
+    assert r.status_code == 200
+    assert seen["gaps"] is None              # garbage -> recompute server-side
 
 
 def test_open_forces_composed_false(monkeypatch):
