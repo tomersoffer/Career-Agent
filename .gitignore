@@ -14,7 +14,7 @@ env/
 
 # ---- Raw dataset: 531 MB, postings.csv exceeds GitHub's 100 MB limit ----
 # Not needed to run the app (the app loads project/output/gold_linkedin_with_clusters.csv.gz).
-# A 1,000-row raw sample is kept in before_vs_after/ for the before/after comparison.
+# A 1,000-row raw sample is kept in before_after_cleaning/ for the before/after comparison.
 # Full raw source: LinkedIn Job Postings dataset (Kaggle).
 Job Posting Dataset/
 

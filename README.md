@@ -18,9 +18,9 @@ Career Agent/
 │   ├── postings.csv              ← main raw table (493 MB)
 │   └── companies/  jobs/  mappings/
 │
-├── before_vs_after/              ← quick side-by-side (1,000-row samples, open in Excel)
-│   ├── BEFORE_postings_raw_sample.csv   (31 messy raw columns)
-│   └── AFTER_gold_cleaned_sample.csv    (16 clean, encoded columns)
+├── before_after_cleaning/        ← quick side-by-side (1,000-row samples, open in Excel)
+│   ├── raw_data_before_cleaning.csv     (31 messy raw columns)
+│   └── cleaned_data_after_cleaning.csv  (16 clean, encoded columns)
 │
 ├── benchmarking/                 ← model-comparison & validation TOOLING
 │   ├── run_traces.py / run_traces_agent.py        ← produce the trace/eval JSON
@@ -56,7 +56,7 @@ Career Agent/
 > \* **`[local only]`** = present in this folder but **not in the GitHub repo** (exceeds GitHub's
 > 100 MB file limit; also `local.env` is excluded for security). If you cloned this from GitHub,
 > the raw dataset and the full 890 MB master are absent — the app still runs (it uses the 7 MB
-> `gold...csv.gz`), and the before/after is still visible via the samples in `before_vs_after/`.
+> `gold...csv.gz`), and the before/after is still visible via the samples in `before_after_cleaning/`.
 
 ---
 
@@ -71,7 +71,7 @@ The cleaning (in `preperation_and_merge.py`) aggregates the 11 raw tables to one
 applies the smart salary-recovery rules, drops junk / foreign / sub-minimum-wage / duplicate
 rows, builds the ML `text_blob`, and encodes the ordinal features. `training_and_clustering.py`
 then adds K-Means cluster IDs and anomaly flags. For a quick look, compare the two CSVs in
-`before_vs_after/`.
+`before_after_cleaning/`.
 
 ---
 
