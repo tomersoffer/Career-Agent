@@ -1,0 +1,35 @@
+{
+  "salary_band": {
+    "0": "Not Listed",
+    "1": "Under $40,000",
+    "2": "$40,000-$60,000",
+    "3": "$60,000-$80,000",
+    "4": "$80,000-$100,000",
+    "5": "$100,000-$150,000",
+    "6": "$150,000-$200,000",
+    "7": "$200,000+"
+  },
+  "company_size": {
+    "0": "Unknown",
+    "1": "1-10",
+    "2": "11-50",
+    "3": "51-200",
+    "4": "201-500",
+    "5": "501-1,000",
+    "6": "1,001-5,000",
+    "7": "5,001+"
+  },
+  "experience_rank": {
+    "0": "Not Specified",
+    "1": "Internship",
+    "2": "Entry level",
+    "3": "Associate",
+    "4": "Mid-Senior level",
+    "5": "Director",
+    "6": "Executive"
+  },
+  "remote_allowed": {
+    "0": "Not flagged as remote",
+    "1": "Remote allowed"
+  }
+}
