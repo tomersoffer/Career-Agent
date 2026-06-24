@@ -1,0 +1,195 @@
+{
+  "n": 21,
+  "passed": 21,
+  "rows": [
+    {
+      "i": 1,
+      "q": "אני מחפש משרת data analyst בניו יורק",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 2,
+      "q": "find me nurse jobs in Texas",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 3,
+      "q": "data analyst",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 4,
+      "q": "כמה מרוויח data analyst בממוצע בניו יורק?",
+      "expected_tool": "get_job_stat",
+      "tools_called": [
+        "get_job_stat"
+      ],
+      "ok": true
+    },
+    {
+      "i": 5,
+      "q": "how many remote QA jobs are there?",
+      "expected_tool": "get_job_stat",
+      "tools_called": [
+        "get_job_stat"
+      ],
+      "ok": true
+    },
+    {
+      "i": 6,
+      "q": "איך מתכוננים לראיון עבודה לתפקיד אנליסט נתונים?",
+      "expected_tool": "give_career_advice",
+      "tools_called": [
+        "give_career_advice"
+      ],
+      "ok": true
+    },
+    {
+      "i": 7,
+      "q": "אני שוקל לעבור מהוראה לתחום הדאטה, מה דעתך?",
+      "expected_tool": "give_career_advice",
+      "tools_called": [
+        "give_career_advice"
+      ],
+      "ok": true
+    },
+    {
+      "i": 8,
+      "q": "תודה רבה!",
+      "expected_tool": "small_talk",
+      "tools_called": [
+        "small_talk"
+      ],
+      "ok": true
+    },
+    {
+      "i": 9,
+      "q": "מה אתה יודע לעשות?",
+      "expected_tool": "small_talk",
+      "tools_called": [
+        "small_talk"
+      ],
+      "ok": true
+    },
+    {
+      "i": 10,
+      "q": "עוד",
+      "expected_tool": "more_results",
+      "tools_called": [
+        "more_results"
+      ],
+      "ok": true
+    },
+    {
+      "i": 11,
+      "q": "כדאי לי ללמוד Python או SQL בשביל data analyst?",
+      "expected_tool": "give_career_advice",
+      "tools_called": [
+        "give_career_advice"
+      ],
+      "ok": true
+    },
+    {
+      "i": 12,
+      "q": "מה ההבדל בין data analyst ל-data scientist?",
+      "expected_tool": "give_career_advice",
+      "tools_called": [
+        "give_career_advice"
+      ],
+      "ok": true
+    },
+    {
+      "i": 13,
+      "q": "מהם הכישורים הנפוצים ביותר למשרות data analyst?",
+      "expected_tool": "get_job_stat",
+      "tools_called": [
+        "get_job_stat"
+      ],
+      "ok": true
+    },
+    {
+      "i": 14,
+      "q": "אני מהנדס תוכנה עם 5 שנות ניסיון, תמצא לי משרות מתאימות",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 15,
+      "q": "show me senior product manager roles in San Francisco",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 16,
+      "q": "אני כבר לא מחפש עבודה, רק רציתי להגיד תודה רבה!",
+      "expected_tool": "small_talk",
+      "tools_called": [
+        "small_talk"
+      ],
+      "ok": true
+    },
+    {
+      "i": 17,
+      "q": "איזה תפקיד משלם הכי הרבה?",
+      "expected_tool": "get_job_stat",
+      "tools_called": [
+        "get_job_stat"
+      ],
+      "ok": true
+    },
+    {
+      "i": 18,
+      "q": "אני data analyst אבל רוצה להיות מנהל מוצר, מה כדאי לי לעשות?",
+      "expected_tool": "give_career_advice",
+      "tools_called": [
+        "give_career_advice"
+      ],
+      "ok": true
+    },
+    {
+      "i": 19,
+      "q": "fnid me marketing jobz in chicago",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 20,
+      "q": "מה יש לכם בבוסטון?",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    },
+    {
+      "i": 21,
+      "q": "מתכנת בגוגל בקליפורניה",
+      "expected_tool": "search_jobs",
+      "tools_called": [
+        "search_jobs"
+      ],
+      "ok": true
+    }
+  ]
+}

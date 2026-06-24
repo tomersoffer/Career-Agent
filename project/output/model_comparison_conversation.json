@@ -1,0 +1,593 @@
+[
+  {
+    "name": "Claude Sonnet 4.6",
+    "model": "claude-sonnet-4-6",
+    "adherence": 0.9130434782608695,
+    "passed": 63,
+    "total": 69,
+    "lat_mean": 6.035885016123454,
+    "lat_median": 4.972968816757202,
+    "price_in": 3.0,
+    "price_out": 15.0,
+    "transcript": [
+      {
+        "turn": "1 scope-guard (cold)",
+        "flow": "scope",
+        "ok": true,
+        "expected": "decline, NO tool",
+        "got": "tools=[] mode=chat",
+        "latency": 2.781
+      },
+      {
+        "turn": "2 smalltalk",
+        "flow": "intent",
+        "ok": true,
+        "expected": "small_talk / capabilities",
+        "got": "tools=['small_talk'] mode=chat",
+        "latency": 9.119
+      },
+      {
+        "turn": "3 search w/o profile -> kickoff",
+        "flow": "intent+kickoff",
+        "ok": true,
+        "expected": "mode=interview (start_profile_interview)",
+        "got": "mode=interview",
+        "latency": 2.542
+      },
+      {
+        "turn": "4 interview: role",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "role captured -> ask experience",
+        "got": "titles=['Data Analyst', 'BI Analyst'] next=experience",
+        "latency": 2.827
+      },
+      {
+        "turn": "5 interview: experience",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "exp captured -> ask location",
+        "got": "years=3 sen=entry next=location",
+        "latency": 2.863
+      },
+      {
+        "turn": "6 interview: location",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "state=NY -> ask skills",
+        "got": "state=NY next=skills",
+        "latency": 3.314
+      },
+      {
+        "turn": "7 interview: skills -> done",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "profile complete, cv_text synthesized",
+        "got": "done=True cv_text=True",
+        "latency": 2.921
+      },
+      {
+        "turn": "8 real job search",
+        "flow": "search",
+        "ok": true,
+        "expected": "mode=search, NY data-analyst matches",
+        "got": "mode=search matches=3",
+        "latency": 4.973
+      },
+      {
+        "turn": "9 paging (memory)",
+        "flow": "paging",
+        "ok": true,
+        "expected": "more_results, offset advances",
+        "got": "mode=more matches=3",
+        "latency": 2.035
+      },
+      {
+        "turn": "10 data question",
+        "flow": "intent:data",
+        "ok": true,
+        "expected": "mode=data_question (computed stat)",
+        "got": "mode=data_question",
+        "latency": 18.508
+      },
+      {
+        "turn": "11 career advice",
+        "flow": "intent:advice",
+        "ok": true,
+        "expected": "mode=advice",
+        "got": "mode=advice",
+        "latency": 17.583
+      },
+      {
+        "turn": "12 scope-guard (mid-context)",
+        "flow": "scope",
+        "ok": true,
+        "expected": "decline, stay in scope (no search)",
+        "got": "mode=chat matches=0",
+        "latency": 14.742
+      },
+      {
+        "turn": "13 CV upload",
+        "flow": "cv-upload",
+        "ok": true,
+        "expected": "profile + titles + scorecard",
+        "got": "ok=True titles=['Data Engineer-SQL/ Python/ Data Analysis', 'Data Analyst - Power BI & SQL']",
+        "latency": 7.779
+      },
+      {
+        "turn": "14 CV-ranked search",
+        "flow": "search:cv",
+        "ok": true,
+        "expected": "mode=search, matches carry cv_fit%",
+        "got": "mode=search matches=3",
+        "latency": 6.282
+      },
+      {
+        "turn": "15 tailor handoff",
+        "flow": "tailor",
+        "ok": false,
+        "expected": "mode=tailor",
+        "got": "mode=chat q=None",
+        "latency": 8.122
+      },
+      {
+        "turn": "16 tailor: opener",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "asks about section 1",
+        "got": "reply=True sec_idx=0",
+        "latency": 2.804
+      },
+      {
+        "turn": "17 tailor: section 1",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 1, advance",
+        "got": "section_done=True next_idx=1",
+        "latency": 5.437
+      },
+      {
+        "turn": "18 tailor: section 2",
+        "flow": "tailor-walk",
+        "ok": false,
+        "expected": "gather section 2, advance",
+        "got": "section_done=False next_idx=1",
+        "latency": 5.758
+      },
+      {
+        "turn": "19 tailor: section 3",
+        "flow": "tailor-walk",
+        "ok": false,
+        "expected": "gather section 3, advance",
+        "got": "section_done=False next_idx=1",
+        "latency": 6.839
+      },
+      {
+        "turn": "20 tailor: section 4",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 4, advance",
+        "got": "section_done=False next_idx=1",
+        "latency": 4.4
+      },
+      {
+        "turn": "21 tailor: section 5",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 5, advance",
+        "got": "section_done=True next_idx=2",
+        "latency": 5.022
+      },
+      {
+        "turn": "22 tailor: section 6",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 6, advance",
+        "got": "section_done=False next_idx=2",
+        "latency": 4.247
+      },
+      {
+        "turn": "23 tailor: compose",
+        "flow": "tailor-compose",
+        "ok": true,
+        "expected": "proposed_cv emitted",
+        "got": "proposed_cv=True done=True",
+        "latency": 10.66
+      }
+    ]
+  },
+  {
+    "name": "GPT-4.1-mini",
+    "model": "gpt-4.1-mini",
+    "adherence": 0.8695652173913043,
+    "passed": 60,
+    "total": 69,
+    "lat_mean": 3.590653143067291,
+    "lat_median": 2.1580305099487305,
+    "price_in": 0.4,
+    "price_out": 1.6,
+    "transcript": [
+      {
+        "turn": "1 scope-guard (cold)",
+        "flow": "scope",
+        "ok": true,
+        "expected": "decline, NO tool",
+        "got": "tools=[] mode=chat",
+        "latency": 2.158
+      },
+      {
+        "turn": "2 smalltalk",
+        "flow": "intent",
+        "ok": true,
+        "expected": "small_talk / capabilities",
+        "got": "tools=['small_talk'] mode=chat",
+        "latency": 3.765
+      },
+      {
+        "turn": "3 search w/o profile -> kickoff",
+        "flow": "intent+kickoff",
+        "ok": false,
+        "expected": "mode=interview (start_profile_interview)",
+        "got": "mode=chat",
+        "latency": 2.76
+      },
+      {
+        "turn": "4 interview: role",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "role captured -> ask experience",
+        "got": "titles=['data analyst', 'BI analyst'] next=experience",
+        "latency": 2.067
+      },
+      {
+        "turn": "5 interview: experience",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "exp captured -> ask location",
+        "got": "years=3 sen=entry next=location",
+        "latency": 1.878
+      },
+      {
+        "turn": "6 interview: location",
+        "flow": "build-profile",
+        "ok": false,
+        "expected": "state=NY -> ask skills",
+        "got": "state= next=skills",
+        "latency": 1.558
+      },
+      {
+        "turn": "7 interview: skills -> done",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "profile complete, cv_text synthesized",
+        "got": "done=True cv_text=True",
+        "latency": 2.651
+      },
+      {
+        "turn": "8 real job search",
+        "flow": "search",
+        "ok": true,
+        "expected": "mode=search, NY data-analyst matches",
+        "got": "mode=search matches=3",
+        "latency": 2.045
+      },
+      {
+        "turn": "9 paging (memory)",
+        "flow": "paging",
+        "ok": true,
+        "expected": "more_results, offset advances",
+        "got": "mode=more matches=3",
+        "latency": 1.463
+      },
+      {
+        "turn": "10 data question",
+        "flow": "intent:data",
+        "ok": true,
+        "expected": "mode=data_question (computed stat)",
+        "got": "mode=data_question",
+        "latency": 6.687
+      },
+      {
+        "turn": "11 career advice",
+        "flow": "intent:advice",
+        "ok": true,
+        "expected": "mode=advice",
+        "got": "mode=advice",
+        "latency": 6.835
+      },
+      {
+        "turn": "12 scope-guard (mid-context)",
+        "flow": "scope",
+        "ok": false,
+        "expected": "decline, stay in scope (no search)",
+        "got": "mode=search matches=3",
+        "latency": 39.388
+      },
+      {
+        "turn": "13 CV upload",
+        "flow": "cv-upload",
+        "ok": true,
+        "expected": "profile + titles + scorecard",
+        "got": "ok=True titles=['Data Engineer-SQL/ Python/ Data Analysis', 'Data Analyst - Power BI & SQL']",
+        "latency": 4.794
+      },
+      {
+        "turn": "14 CV-ranked search",
+        "flow": "search:cv",
+        "ok": true,
+        "expected": "mode=search, matches carry cv_fit%",
+        "got": "mode=search matches=3",
+        "latency": 13.671
+      },
+      {
+        "turn": "15 tailor handoff",
+        "flow": "tailor",
+        "ok": true,
+        "expected": "mode=tailor",
+        "got": "mode=tailor q='1'",
+        "latency": 7.745
+      },
+      {
+        "turn": "16 tailor: opener",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "asks about section 1",
+        "got": "reply=True sec_idx=0",
+        "latency": 1.608
+      },
+      {
+        "turn": "17 tailor: section 1",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 1, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.655
+      },
+      {
+        "turn": "18 tailor: section 2",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 2, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.517
+      },
+      {
+        "turn": "19 tailor: section 3",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 3, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.677
+      },
+      {
+        "turn": "20 tailor: section 4",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 4, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.05
+      },
+      {
+        "turn": "21 tailor: section 5",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 5, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.298
+      },
+      {
+        "turn": "22 tailor: section 6",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 6, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.105
+      },
+      {
+        "turn": "23 tailor: compose",
+        "flow": "tailor-compose",
+        "ok": true,
+        "expected": "proposed_cv emitted",
+        "got": "proposed_cv=True done=True",
+        "latency": 4.035
+      }
+    ]
+  },
+  {
+    "name": "GPT-5.4-mini",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "adherence": 0.9130434782608695,
+    "passed": 63,
+    "total": 69,
+    "lat_mean": 2.050356916759325,
+    "lat_median": 1.3213322162628174,
+    "price_in": 0.75,
+    "price_out": 4.5,
+    "transcript": [
+      {
+        "turn": "1 scope-guard (cold)",
+        "flow": "scope",
+        "ok": true,
+        "expected": "decline, NO tool",
+        "got": "tools=[] mode=chat",
+        "latency": 1.5
+      },
+      {
+        "turn": "2 smalltalk",
+        "flow": "intent",
+        "ok": true,
+        "expected": "small_talk / capabilities",
+        "got": "tools=['small_talk'] mode=chat",
+        "latency": 2.405
+      },
+      {
+        "turn": "3 search w/o profile -> kickoff",
+        "flow": "intent+kickoff",
+        "ok": true,
+        "expected": "mode=interview (start_profile_interview)",
+        "got": "mode=interview",
+        "latency": 1.5
+      },
+      {
+        "turn": "4 interview: role",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "role captured -> ask experience",
+        "got": "titles=['data analyst', 'BI analyst'] next=experience",
+        "latency": 0.902
+      },
+      {
+        "turn": "5 interview: experience",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "exp captured -> ask location",
+        "got": "years=3 sen=None next=location",
+        "latency": 0.858
+      },
+      {
+        "turn": "6 interview: location",
+        "flow": "build-profile",
+        "ok": false,
+        "expected": "state=NY -> ask skills",
+        "got": "state= next=skills",
+        "latency": 2.834
+      },
+      {
+        "turn": "7 interview: skills -> done",
+        "flow": "build-profile",
+        "ok": true,
+        "expected": "profile complete, cv_text synthesized",
+        "got": "done=True cv_text=True",
+        "latency": 0.985
+      },
+      {
+        "turn": "8 real job search",
+        "flow": "search",
+        "ok": true,
+        "expected": "mode=search, NY data-analyst matches",
+        "got": "mode=search matches=3",
+        "latency": 2.225
+      },
+      {
+        "turn": "9 paging (memory)",
+        "flow": "paging",
+        "ok": true,
+        "expected": "more_results, offset advances",
+        "got": "mode=more matches=3",
+        "latency": 1.243
+      },
+      {
+        "turn": "10 data question",
+        "flow": "intent:data",
+        "ok": false,
+        "expected": "mode=data_question (computed stat)",
+        "got": "mode=search",
+        "latency": 4.088
+      },
+      {
+        "turn": "11 career advice",
+        "flow": "intent:advice",
+        "ok": true,
+        "expected": "mode=advice",
+        "got": "mode=advice",
+        "latency": 4.671
+      },
+      {
+        "turn": "12 scope-guard (mid-context)",
+        "flow": "scope",
+        "ok": true,
+        "expected": "decline, stay in scope (no search)",
+        "got": "mode=chat matches=0",
+        "latency": 2.945
+      },
+      {
+        "turn": "13 CV upload",
+        "flow": "cv-upload",
+        "ok": true,
+        "expected": "profile + titles + scorecard",
+        "got": "ok=True titles=['Data Engineer-SQL/ Python/ Data Analysis', 'Data Analyst - Power BI & SQL']",
+        "latency": 3.119
+      },
+      {
+        "turn": "14 CV-ranked search",
+        "flow": "search:cv",
+        "ok": true,
+        "expected": "mode=search, matches carry cv_fit%",
+        "got": "mode=search matches=3",
+        "latency": 2.582
+      },
+      {
+        "turn": "15 tailor handoff",
+        "flow": "tailor",
+        "ok": true,
+        "expected": "mode=tailor",
+        "got": "mode=tailor q='job #1 Data Analyst'",
+        "latency": 5.755
+      },
+      {
+        "turn": "16 tailor: opener",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "asks about section 1",
+        "got": "reply=True sec_idx=0",
+        "latency": 0.929
+      },
+      {
+        "turn": "17 tailor: section 1",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 1, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.128
+      },
+      {
+        "turn": "18 tailor: section 2",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 2, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.32
+      },
+      {
+        "turn": "19 tailor: section 3",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 3, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 1.073
+      },
+      {
+        "turn": "20 tailor: section 4",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 4, advance",
+        "got": "section_done=False next_idx=0",
+        "latency": 2.49
+      },
+      {
+        "turn": "21 tailor: section 5",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 5, advance",
+        "got": "section_done=True next_idx=1",
+        "latency": 1.255
+      },
+      {
+        "turn": "22 tailor: section 6",
+        "flow": "tailor-walk",
+        "ok": true,
+        "expected": "gather section 6, advance",
+        "got": "section_done=False next_idx=1",
+        "latency": 0.996
+      },
+      {
+        "turn": "23 tailor: compose",
+        "flow": "tailor-compose",
+        "ok": true,
+        "expected": "proposed_cv emitted",
+        "got": "proposed_cv=True done=True",
+        "latency": 2.617
+      }
+    ]
+  }
+]

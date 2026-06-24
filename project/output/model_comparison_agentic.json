@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Claude Sonnet 4.6",
+    "model": "claude-sonnet-4-6",
+    "flow": 0.9230769230769231,
+    "passed": 12,
+    "total": 13,
+    "lat_mean": 7.878585595350999,
+    "lat_median": 7.694057941436768,
+    "price_in": 3.0,
+    "price_out": 15.0
+  },
+  {
+    "name": "GPT-4.1-mini",
+    "model": "gpt-4.1-mini",
+    "flow": 0.9230769230769231,
+    "passed": 12,
+    "total": 13,
+    "lat_mean": 2.997542839783889,
+    "lat_median": 3.348616361618042,
+    "price_in": 0.4,
+    "price_out": 1.6
+  },
+  {
+    "name": "GPT-5.4-mini",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "flow": 1.0,
+    "passed": 13,
+    "total": 13,
+    "lat_mean": 2.2374796317173886,
+    "lat_median": 2.387613534927368,
+    "price_in": 0.75,
+    "price_out": 4.5
+  }
+]

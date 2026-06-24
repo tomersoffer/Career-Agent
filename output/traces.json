@@ -1,0 +1,358 @@
+[
+  {
+    "label": "search-he",
+    "category": "חיפוש (search)",
+    "prompt": "אני מחפש משרת data analyst בניו יורק",
+    "intent": {
+      "role_en": "data analyst",
+      "synonyms": [
+        "business intelligence analyst",
+        "reporting analyst",
+        "bi analyst",
+        "data reporting analyst"
+      ],
+      "city": "New York",
+      "state": "NY",
+      "nearby_states": [
+        "NJ",
+        "CT",
+        "PA",
+        "MA"
+      ],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "search",
+      "intent": "job_search",
+      "wants_more": false
+    },
+    "tool_call": "mode=search → get_recommendations()  [hard geo-filter on state + TF-IDF cosine on title/synonyms + experience proximity → hybrid rank] → generate_reply()",
+    "matches": [
+      {
+        "rank": 1,
+        "title": "Data Analyst",
+        "company": "Open Systems Technologies",
+        "location": "New York, NY",
+        "salary_band": 4,
+        "is_anomaly": 0,
+        "score": 0.8
+      },
+      {
+        "rank": 2,
+        "title": "Data Analyst",
+        "company": "Dexian",
+        "location": "Getzville, NY",
+        "salary_band": 4,
+        "is_anomaly": 0,
+        "score": 0.8
+      },
+      {
+        "rank": 3,
+        "title": "Data Analyst",
+        "company": "Tenazx Inc",
+        "location": "Queens, NY",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.8
+      }
+    ],
+    "reply": {
+      "intro": "מצאתי לך 3 משרות Data Analyst בניו יורק שנראות רלוונטיות. שווה לפעול עכשיו, כי יש התאמה טובה לכותרת ולמיקום.",
+      "jobs": {
+        "1": "Open Systems Technologies — התאמה טובה למשרת Data Analyst, עם שכר חזק ודרישה ברורה לתפקיד. זו אופציה טובה להתחיל ממנה כי היא הכי מסודרת ובולטת.",
+        "2": "Dexian — גם זו משרת Data Analyst מתאימה, עם פוטנציאל טוב ושכר טוב. שווה להגיש מהר כדי לא לפספס לפני שהיא נסגרת.",
+        "3": "Tenazx Inc — משרת Data Analyst בניו יורק שיכולה להתאים אם אתה רוצה עוד אופציה מהירה. כדאי לבדוק אותה עכשיו כי אין טווח שכר מפורסם וזה יכול לזוז מהר."
+      },
+      "tip": "תתחיל מ-#1, ואז תגיש גם ל-#2 באותו סשן כדי לא לאבד זמן."
+    },
+    "note": "במסלול הווב ללא קו\"ח, job_search פותח תחילה ראיון קצר; מנוע האחזור עצמו מודגם כאן."
+  },
+  {
+    "label": "search-en",
+    "category": "חיפוש (search)",
+    "prompt": "find me nurse jobs in Texas",
+    "intent": {
+      "role_en": "nurse",
+      "synonyms": [
+        "registered nurse",
+        "rn",
+        "licensed practical nurse",
+        "lpn"
+      ],
+      "city": "",
+      "state": "TX",
+      "nearby_states": [
+        "OK",
+        "NM",
+        "AR",
+        "LA"
+      ],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "search",
+      "intent": "job_search",
+      "wants_more": false
+    },
+    "tool_call": "mode=search → get_recommendations()  [hard geo-filter on state + TF-IDF cosine on title/synonyms + experience proximity → hybrid rank] → generate_reply()",
+    "matches": [
+      {
+        "rank": 1,
+        "title": "Nurse",
+        "company": "My Houston Surgeons",
+        "location": "The Woodlands, TX",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.8
+      },
+      {
+        "rank": 2,
+        "title": "Nurse Aesthetician",
+        "company": NaN,
+        "location": "Laredo, TX",
+        "salary_band": 3,
+        "is_anomaly": 0,
+        "score": 0.8
+      },
+      {
+        "rank": 3,
+        "title": "Registered Nurse",
+        "company": "The US Oncology Network",
+        "location": "Austin, TX",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.75
+      }
+    ],
+    "reply": {
+      "intro": "מצאתי כמה משרות רלוונטיות בטקסס. אלה התאמות טובות, אז שווה להגיש היום כדי לא לפספס.",
+      "jobs": {
+        "1": "נראה חזק אם אתה מחפש תפקיד אחות בצוות כירורגי ב-My Houston Surgeons. זה מתאים במיוחד אם אתה רוצה להיכנס מהר לשטח קליני פעיל.",
+        "2": "תפקיד Nurse Aesthetician יכול להיות מעולה אם אתה מחפש שילוב של טיפול אחות עם עולם האסתטיקה. השכר מצוין ביחס לסוג התפקיד, אז שווה לבדוק מיד.",
+        "3": "Registered Nurse ב-The US Oncology Network הוא כיוון טוב אם אתה רוצה תפקיד מסודר עם גוף רפואי מוכר. אם יש לך ניסיון קליני, זו משרה שכדאי להגיש אליה עכשיו."
+      },
+      "tip": "תתחיל מ-#3 ואז #2: הראשונה נראית הכי יציבה, והשנייה בולטת בגלל השכר."
+    },
+    "note": "במסלול הווב ללא קו\"ח, job_search פותח תחילה ראיון קצר; מנוע האחזור עצמו מודגם כאן."
+  },
+  {
+    "label": "data-question",
+    "category": "שאלת-נתונים (data_question)",
+    "prompt": "מה השכר הטיפוסי ל-data analyst בניו יורק?",
+    "intent": {
+      "role_en": "data analyst",
+      "synonyms": [
+        "business intelligence analyst",
+        "reporting analyst",
+        "bi analyst"
+      ],
+      "city": "New York",
+      "state": "NY",
+      "nearby_states": [
+        "NJ",
+        "CT",
+        "PA",
+        "MA",
+        "VT"
+      ],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "data_question",
+      "intent": "info",
+      "wants_more": false
+    },
+    "tool_call": "mode=data_question → analytics.answer_data_question() → reply_json(map) picks 1 whitelisted fn → pandas compute → narrate. plan={\"function\": \"salary_stats\", \"params\": {\"role\": \"data analyst\", \"state\": \"NY\"}}",
+    "matches": {
+      "computed_fact": {
+        "function": "salary_stats",
+        "n": 131,
+        "median": 86500,
+        "p25": 72437,
+        "p75": 122850
+      }
+    },
+    "reply": "השכר הטיפוסי ל-data analyst בניו יורק הוא 86,500 דולר בשנה, על בסיס 131 משרות.",
+    "note": ""
+  },
+  {
+    "label": "advice-interview",
+    "category": "ייעוץ (advice)",
+    "prompt": "איך מתכוננים לראיון עבודה לתפקיד אנליסט נתונים?",
+    "intent": {
+      "role_en": "data analyst",
+      "synonyms": [
+        "business intelligence analyst",
+        "reporting analyst",
+        "bi analyst",
+        "data reporting analyst"
+      ],
+      "city": "",
+      "state": "",
+      "nearby_states": [],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "advice",
+      "intent": "info",
+      "wants_more": false
+    },
+    "tool_call": "mode=advice → advice_reply()  [ללא אחזור — ייעוץ מעוגן בשיחה/במשרות שעל המסך בלבד]",
+    "matches": null,
+    "reply": "תתכונן להסביר פרויקטים שעשית, איך ניקית וניתחת נתונים, ואיך השתמשת ב-Excel/SQL או Python כדי לפתור בעיה. כדאי גם לתרגל שאלות על חשיבה לוגית, דיוק, והצגת ממצאים בצורה ברורה ולא טכנית מדי.",
+    "note": ""
+  },
+  {
+    "label": "advice-skills",
+    "category": "ייעוץ (advice)",
+    "prompt": "כדאי לי ללמוד Python או SQL בשביל data analyst?",
+    "intent": {
+      "role_en": "data analyst",
+      "synonyms": [
+        "business intelligence analyst",
+        "reporting analyst",
+        "bi analyst",
+        "data reporting analyst"
+      ],
+      "city": "",
+      "state": "",
+      "nearby_states": [],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "advice",
+      "intent": "info",
+      "wants_more": false
+    },
+    "tool_call": "mode=advice → advice_reply()  [ללא אחזור — ייעוץ מעוגן בשיחה/במשרות שעל המסך בלבד]",
+    "matches": null,
+    "reply": "ל־Data Analyst עדיף להתחיל מ‑SQL כי הוא הכי בסיסי ושימושי לעבודה יומיומית עם נתונים. אחר כך תלמד Python כדי לעשות ניתוחים יותר מתקדמים, אוטומציה ולטפל בכמויות גדולות של נתונים.",
+    "note": ""
+  },
+  {
+    "label": "smalltalk",
+    "category": "small-talk",
+    "prompt": "מה אתה יודע לעשות?",
+    "intent": {
+      "role_en": "",
+      "synonyms": [],
+      "city": "",
+      "state": "",
+      "nearby_states": [],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "smalltalk",
+      "intent": "info",
+      "wants_more": false
+    },
+    "tool_call": "mode=smalltalk → chat_reply()  [ללא אחזור]",
+    "matches": null,
+    "reply": "אני קורא קו״ח, מתאים משרות לפרופיל שלך, מדרג אותן ושולח אותך ישר להגיש; אני מחפש במאגר גלובלי של כ־119 אלף משרות בארה״ב.",
+    "note": ""
+  },
+  {
+    "label": "more",
+    "category": "בקשת המשך (more)",
+    "prompt": "עוד",
+    "intent": {
+      "role_en": "",
+      "synonyms": [],
+      "city": "",
+      "state": "",
+      "nearby_states": [],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "more",
+      "intent": "job_search",
+      "wants_more": true
+    },
+    "tool_call": "mode=more → get_recommendations(last_q, offset=3)  [דפדוף; הכותרת תבניתית — אין קריאת-LLM שנייה]",
+    "matches": [
+      {
+        "rank": 4,
+        "title": "Data Analyst",
+        "company": "Dexian",
+        "location": "Getzville, NY",
+        "salary_band": 4,
+        "is_anomaly": 0,
+        "score": 0.8
+      },
+      {
+        "rank": 5,
+        "title": "Data Analyst",
+        "company": "Tenazx Inc",
+        "location": "Queens, NY",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.8
+      },
+      {
+        "rank": 6,
+        "title": "Analyst",
+        "company": "Castle Park Investments",
+        "location": "New York, NY",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.73
+      }
+    ],
+    "reply": "הנה עוד התאמות 👇",
+    "note": "last_q = \"data analyst בניו יורק\" (החיפוש הקודם). התשובה תבניתית — אין קריאת-LLM שנייה."
+  },
+  {
+    "label": "failure-location",
+    "category": "כשל — איבוד מיקום",
+    "prompt": "מתכנת בגוגל בקליפורניה",
+    "intent": {
+      "role_en": "programmer",
+      "synonyms": [
+        "software engineer",
+        "developer",
+        "software developer"
+      ],
+      "city": "California",
+      "state": "",
+      "nearby_states": [],
+      "seniority": "",
+      "experience_rank": 0,
+      "mode": "search",
+      "intent": "job_search",
+      "wants_more": false
+    },
+    "tool_call": "mode=search → get_recommendations()  [אך state='' → סינון הגאוגרפי מבוטל → החיפוש רץ על כל ארה\"ב במקום על CA]",
+    "matches": [
+      {
+        "rank": 1,
+        "title": "Mazatrol Programmer",
+        "company": "Path Engineering",
+        "location": "Butler, WI",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.5
+      },
+      {
+        "rank": 2,
+        "title": "Programmer",
+        "company": "Dice",
+        "location": "Dimondale, MI",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.5
+      },
+      {
+        "rank": 3,
+        "title": "System Programmer",
+        "company": "Hansen Talent Group (HTG)",
+        "location": "Columbia, South Carolina Metropolitan Area",
+        "salary_band": 0,
+        "is_anomaly": 0,
+        "score": 0.5
+      }
+    ],
+    "reply": {
+      "intro": "יש כאן כמה התאמות, אבל התוצאות פרושות על פני כל ארה״ב — אם תרצה, הוסף עיר או מדינה ואכוון יותר חזק.",
+      "jobs": {
+        "1": "משרה ישירה לתכנות, עם כניסה קלה יחסית. שווה להגיש עכשיו אם אתה רוצה להתחיל במהירות.",
+        "2": "עוד תפקיד טכני עם סיכוי טוב להגיש מהר, בלי הרבה חסמי כניסה. מתאים אם אתה רוצה להרחיב רשת ולתפוס נפח פניות.",
+        "3": "תפקיד חזק יותר למי שכבר יש ניסיון. אם אתה מכוון לרמה גבוהה יותר, זו מועמדות טובה להגיש אליה עכשיו."
+      },
+      "tip": "הגש קודם ל-#1 ול-#2, ואז ל-#3 אם יש לך ניסיון רלוונטי חזק."
+    },
+    "note": "צפוי state=CA; המודל החזיר state='' (קליפורניה נכנסה לשדה city). הניסוח האנגלי מחזיר CA באופן יציב. כתוצאה, המשרות שהוחזרו אינן מסוננות לקליפורניה."
+  }
+]

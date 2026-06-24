@@ -1,0 +1,111 @@
+  {
+  "n_records": 123849,
+  "n_columns": 40,
+  "top_titles": {
+    "Sales Manager": 673,
+    "Customer Service Representative": 373,
+    "Project Manager": 354,
+    "Administrative Assistant": 254,
+    "Senior Accountant": 238,
+    "Executive Assistant": 228,
+    "Salesperson": 211,
+    "Registered Nurse": 210,
+    "Receptionist": 204,
+    "Staff Accountant": 200
+  },
+  "salary": {
+    "postings_with_salary": 36073,
+    "pct_with_salary": 29.1,
+    "mean_annual_usd": 96562.0,
+    "median_annual_usd": 82500.0,
+    "p25_annual_usd": 52000.0,
+    "p75_annual_usd": 125000.0
+  },
+  "median_salary_by_experience": {
+    "Executive": 195000.0,
+    "Director": 167500.0,
+    "Mid-Senior level": 108160.0,
+    "Unknown": 78000.0,
+    "Associate": 74880.0,
+    "Entry level": 52500.0,
+    "Internship": 48880.0
+  },
+  "remote": {
+    "remote_flagged": 15246,
+    "pct_remote": 12.3
+  },
+  "work_type_mix": {
+    "Full-time": 98814,
+    "Contract": 12117,
+    "Part-time": 9696,
+    "Temporary": 1190,
+    "Internship": 983,
+    "Volunteer": 562,
+    "Other": 487
+  },
+  "experience_mix": {
+    "Mid-Senior level": 41489,
+    "Entry level": 36708,
+    "Unknown": 29409,
+    "Associate": 9826,
+    "Director": 3746,
+    "Internship": 1449,
+    "Executive": 1222
+  },
+  "top_states": {
+    "CA": 11484,
+    "TX": 10271,
+    "NY": 6044,
+    "FL": 5907,
+    "NC": 4927,
+    "IL": 4480,
+    "PA": 4133,
+    "VA": 3660,
+    "MA": 3489,
+    "OH": 3421
+  },
+  "top_skills": {
+    "Information Technology": 25256,
+    "Sales": 21193,
+    "Management": 20385,
+    "Manufacturing": 17728,
+    "Health Care Provider": 16675,
+    "Business Development": 13304,
+    "Engineering": 12530,
+    "Other": 12314,
+    "Finance": 8011,
+    "Marketing": 5400
+  },
+  "top_companies": {
+    "Liberty Healthcare and Rehabilitation Services": 1108,
+    "The Job Network": 1003,
+    "J. Galt": 604,
+    "TEKsystems": 529,
+    "Lowe's Companies, Inc.": 527,
+    "Ingersoll Rand": 517,
+    "Capital One": 496,
+    "Cogent Communications": 476,
+    "Insight Global": 418,
+    "Dice": 415
+  },
+  "top_company_industries": {
+    "Staffing and Recruiting": 18886,
+    "Hospitals and Health Care": 15731,
+    "IT Services and IT Consulting": 11515,
+    "Retail": 9639,
+    "Software Development": 5715,
+    "Financial Services": 5504,
+    "Construction": 1969,
+    "Hospitality": 1913,
+    "Non-profit Organizations": 1904,
+    "Real Estate": 1868
+  },
+  "figures": {
+    "top_titles": "output\\figures\\top_titles.png",
+    "salary_by_experience": "output\\figures\\salary_by_experience.png",
+    "remote": "output\\figures\\remote_split.png",
+    "experience": "output\\figures\\experience_mix.png",
+    "geography": "output\\figures\\top_states.png",
+    "skills": "output\\figures\\top_skills.png"
+  }
+}

@@ -18,6 +18,11 @@ env/
 # Full raw source: LinkedIn Job Postings dataset (Kaggle).
 Job Posting Dataset/
 
+# ---- Full master table: 890 MB, exceeds GitHub's 100 MB limit ----
+# Kept locally only. It is the cleaned merge output (Phase 2); the final clustered
+# dataset the app actually uses is project/output/gold_linkedin_with_clusters.csv.gz.
+project/output/master_jobs_dataset.csv
+
 # ---- OS / editor ----
 .DS_Store
 Thumbs.db

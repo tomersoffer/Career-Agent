@@ -1,0 +1,203 @@
+[
+  {
+    "label": "search",
+    "prompt": "אני מחפש משרת data analyst בניו יורק",
+    "tool_trace": [
+      {
+        "tool": "search_jobs",
+        "args": {
+          "role": "data analyst",
+          "state": "NY"
+        },
+        "result": {
+          "matches_n": 3,
+          "top": [
+            "Data Analyst @ Open Systems Technologies",
+            "Data Analyst @ Dexian",
+            "Data Analyst @ Tenazx Inc"
+          ]
+        }
+      }
+    ],
+    "matches_n": 3,
+    "mode": "search",
+    "state": "NY",
+    "reply": "מצאתי 3 משרות מתאימות בניו יורק:\n\n1. Data Analyst — Open Systems Technologies, New York, NY, כניסה.  \n2. Data Analyst — Dexian, Getzville, NY.  \n3. Data Analyst — Tenazx Inc, Queens, NY.\n\nאם תרצה, אני יכול לסנן לפי רמה, עבודה מרחוק, או להראות עוד תוצאות."
+  },
+  {
+    "label": "data_question",
+    "prompt": "מה השכר הטיפוסי ל-data analyst בניו יורק?",
+    "tool_trace": [
+      {
+        "tool": "get_job_stat",
+        "args": {
+          "metric": "salary_stats",
+          "role": "data analyst",
+          "state": "NY"
+        },
+        "result": {
+          "fact": {
+            "function": "salary_stats",
+            "n": 131,
+            "median": 86500,
+            "p25": 72437,
+            "p75": 122850
+          }
+        }
+      }
+    ],
+    "matches_n": 0,
+    "mode": "data_question",
+    "state": "NY",
+    "reply": "השכר הטיפוסי ל־data analyst בניו יורק הוא חציוני של **$86,500 לשנה**.  \nהטווח הנפוץ הוא בערך **$72,437–$122,850**."
+  },
+  {
+    "label": "advice",
+    "prompt": "כדאי לי ללמוד Python או SQL בשביל data analyst?",
+    "tool_trace": [
+      {
+        "tool": "give_career_advice",
+        "args": {
+          "topic": "השוואה בין Python ו-SQL למי שרוצה להיות data analyst, ומה כדאי ללמוד קודם"
+        },
+        "result": {
+          "on_screen_jobs": 0
+        }
+      }
+    ],
+    "matches_n": 0,
+    "mode": "advice",
+    "state": null,
+    "reply": "לרוב כדאי להתחיל עם SQL, כי זה כלי בסיסי מאוד ל-data analyst וחוזר כמעט בכל תפקיד.  \nאחר כך ללמוד Python כדי לנתח נתונים מורכבים יותר, לעשות אוטומציה, ולעבוד עם פנדס וגרפים."
+  },
+  {
+    "label": "smalltalk",
+    "prompt": "מה אתה יודע לעשות?",
+    "tool_trace": [
+      {
+        "tool": "small_talk",
+        "args": {},
+        "result": {
+          "capabilities": "קורא קו\"ח, מתאים משרות לפרופיל, מדרג אותן ושולח להגיש; מחפש במאגר של כ-119 אלף מ…"
+        }
+      }
+    ],
+    "matches_n": 0,
+    "mode": "chat",
+    "state": null,
+    "reply": "אני קורא קו״ח, מתאים משרות לפרופיל, מדרג אותן ושולח להגיש. יש לי מאגר של כ-119 אלף משרות בארה״ב; אם תרצה, תעלה קו״ח או נבנה יחד פרופיל קצר."
+  },
+  {
+    "label": "more",
+    "prompt": "עוד",
+    "tool_trace": [
+      {
+        "tool": "more_results",
+        "args": {},
+        "result": {
+          "matches_n": 3,
+          "top": [
+            "Data Analyst @ Tenazx Inc",
+            "Data Analyst @ PowerToFly",
+            "Analyst @ Cedar Legacy"
+          ]
+        }
+      }
+    ],
+    "matches_n": 3,
+    "mode": "more",
+    "state": null,
+    "reply": "עוד תוצאות:\n\n- Data Analyst — Tenazx Inc, Queens, NY\n- Data Analyst — PowerToFly, Purchase, NY\n- Analyst — Cedar Legacy, New York, NY\n\nאם תרצה, אמשיך לעוד תוצאות."
+  },
+  {
+    "label": "multi_step",
+    "prompt": "תמצא לי משרות data analyst בטקסס, וגם כמה הן משלמות בממוצע",
+    "tool_trace": [
+      {
+        "tool": "search_jobs",
+        "args": {
+          "role": "data analyst",
+          "state": "TX"
+        },
+        "result": {
+          "matches_n": 3,
+          "top": [
+            "Data Analyst @ DataAnnotation",
+            "Data Analyst 1 @ Aditi Consulting",
+            "Data Analyst @ Health Care Service Corporation"
+          ]
+        }
+      },
+      {
+        "tool": "get_job_stat",
+        "args": {
+          "metric": "salary_stats",
+          "role": "data analyst",
+          "state": "TX"
+        },
+        "result": {
+          "fact": {
+            "function": "salary_stats",
+            "n": 96,
+            "median": 91250,
+            "p25": 70000,
+            "p75": 117650
+          }
+        }
+      }
+    ],
+    "matches_n": 3,
+    "mode": "data_question",
+    "state": "TX",
+    "reply": "מצאתי 3 משרות data analyst בטקסס: Data Analyst ב-DataAnnotation בארלינגטון, Data Analyst 1 ב-Aditi Consulting בפלאנו, ו-Data Analyst ב-Health Care Service Corporation בריצ'רדסון.\n\nהשכר החציוני הוא 91,250 דולר לשנה. הטווח הרגיל בדאטה הוא 70,000–117,650 דולר."
+  },
+  {
+    "label": "failure_probe",
+    "prompt": "מתכנת בגוגל בקליפורניה",
+    "tool_trace": [
+      {
+        "tool": "search_jobs",
+        "args": {
+          "role": "software engineer",
+          "state": "CA"
+        },
+        "result": {
+          "matches_n": 3,
+          "top": [
+            "Software Engineer @ eBay",
+            "Software Engineer V @ BCforward",
+            "Software Engineer @ Akkodis"
+          ]
+        }
+      }
+    ],
+    "matches_n": 3,
+    "mode": "search",
+    "state": "CA",
+    "reply": "מצאתי כמה משרות תואמות בקליפורניה, אבל לא ראיתי משרה של גוגל בתוצאות.\n\n- Software Engineer — eBay, San Jose, CA. ⚠️ התראת סיכון: זה חריג סטטיסטי, כדאי לאמת את הפרטים.\n- Software Engineer V — BCforward, Menlo Park, CA.\n- Software Engineer — Akkodis, Cupertino, CA.\n\nאם תרצה, אני יכול לחפש שוב עם פילטר יותר מדויק כמו \"Google\", \"frontend\", \"backend\", או עיר ספציפית."
+  },
+  {
+    "label": "failure_company",
+    "prompt": "Tesla jobs",
+    "tool_trace": [
+      {
+        "tool": "search_jobs",
+        "args": {
+          "role": "tesla jobs"
+        },
+        "result": {
+          "matches_n": 3,
+          "top": [
+            "Tesla Advisor @ Tesla",
+            "Tesla Advisor @ Tesla",
+            "Tesla Advisor @ Tesla"
+          ]
+        }
+      }
+    ],
+    "matches_n": 3,
+    "mode": "search",
+    "state": null,
+    "reply": "מצאתי כמה משרות של Tesla:\n- Tesla Advisor — Irvine, CA — כניסה\n- Tesla Advisor — Highland Park, IL — כניסה\n- Tesla Advisor — Boise, ID — כניסה\n\nאם תרצה, אני יכול לסנן לפי מדינה, עבודה מרחוק או תפקיד אחר ב-Tesla."
+  }
+]
