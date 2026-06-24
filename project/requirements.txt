@@ -8,6 +8,7 @@ scikit-learn==1.5.1
 pandas==2.2.2
 joblib==1.4.2
 anthropic
+openai==2.43.0
 apify-client
 python-dotenv
 pypdf
