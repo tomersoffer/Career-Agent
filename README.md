@@ -9,18 +9,26 @@ so the data preparation can be inspected end to end.
 ## Folder layout
 
 ```
-submission/
+Career Agent/
 ├── README.md                     ← this file
 ├── requirements.txt              ← pinned Python dependencies
 ├── local.env.example             ← copy to local.env and add your API key
 │
-├── Job Posting Dataset/          ← BEFORE: the raw LinkedIn dataset (11 CSVs, ~531 MB)
+├── Job Posting Dataset/          ← BEFORE: raw LinkedIn dataset (11 CSVs, ~531 MB)  [local only*]
 │   ├── postings.csv              ← main raw table (493 MB)
-│   ├── companies/  jobs/  mappings/
+│   └── companies/  jobs/  mappings/
 │
 ├── before_vs_after/              ← quick side-by-side (1,000-row samples, open in Excel)
 │   ├── BEFORE_postings_raw_sample.csv   (31 messy raw columns)
 │   └── AFTER_gold_cleaned_sample.csv    (16 clean, encoded columns)
+│
+├── benchmarking/                 ← model-comparison & validation TOOLING
+│   ├── run_traces.py / run_traces_agent.py        ← produce the trace/eval JSON
+│   └── generate_hebrew_doc.py / generate_testing_doc.py  ← build the Hebrew reports
+│
+├── output/                       ← benchmark RESULTS + validation reports
+│   ├── traces.json / traces_agent.json / tool_eval.json / analysis_summary.json
+│   └── GPT5.4-mini_Testing_Validation_v2.docx
 │
 └── project/                      ← all application + pipeline code
     ├── preperation_and_merge.py      ← Phase 2: cleaning & merge  (raw → master)
@@ -29,18 +37,26 @@ submission/
     ├── app.py                        ← Flask web server (entry point)
     ├── agent_runner.py / agent_loop.py / llm_backend.py
     ├── matching.py / analytics.py / build_explainer.py
-    ├── cv/                           ← CV parsing, tailoring, interview flow
+    ├── cv/  (+ cv/tests/)            ← CV parsing, tailoring, interview flow + unit tests
     ├── scraper/                      ← live Israeli-jobs scraper + bundled seed data
     ├── frontend/                     ← HTML / JS / CSS UI
-    ├── tests/                        ← unit tests
+    ├── tests/                        ← unit tests + model-comparison/eval scripts
+    │   ├── test_*.py                          ← pytest unit/integration tests
+    │   ├── compare_models*.py / compare_conversation.py   ← Claude vs GPT benchmarks
+    │   └── eval_*.py                          ← labeled test cases + accuracy/stability evals
     └── output/                       ← AFTER + trained models (what the app loads)
         ├── gold_linkedin_with_clusters.csv.gz   ← cleaned + clustered dataset (7 MB)
         ├── gold_sample.csv                       ← readable 1,000-row preview
-        ├── tfidf_vectorizer.joblib
-        ├── kmeans_model.joblib
-        ├── feature_scaler.joblib
-        └── data_dictionary.json
+        ├── tfidf_vectorizer.joblib / kmeans_model.joblib / feature_scaler.joblib
+        ├── data_dictionary.json
+        ├── model_comparison*.json                ← benchmark results
+        └── master_jobs_dataset.csv               ← full cleaned master (890 MB)  [local only*]
 ```
+
+> \* **`[local only]`** = present in this folder but **not in the GitHub repo** (exceeds GitHub's
+> 100 MB file limit; also `local.env` is excluded for security). If you cloned this from GitHub,
+> the raw dataset and the full 890 MB master are absent — the app still runs (it uses the 7 MB
+> `gold...csv.gz`), and the before/after is still visible via the samples in `before_vs_after/`.
 
 ---
 
@@ -99,4 +115,22 @@ python training_and_clustering.py   # master    → output/gold_linkedin_with_cl
 
 Note: re-running regenerates the large uncompressed intermediates
 (`master_jobs_dataset.csv`, the full `gold` CSV, `tfidf_matrix.npz`) which were intentionally
-**omitted** from this submission to keep it small — the app does not need them.
+**omitted** from the GitHub repo to keep it small — the app does not need them.
+
+---
+
+## Benchmarking & model selection
+
+The model choice (Claude vs GPT-5.4-mini) is backed by real runs, not opinion:
+
+- **`project/tests/compare_models*.py`, `compare_conversation.py`** — run both models over the
+  labeled cases in **`project/tests/eval_*.py`** and write **`project/output/model_comparison*.json`**.
+- **`benchmarking/run_traces*.py`** — execute the agentic tool-calling loop and write the raw
+  traces to **`output/traces*.json`** + **`output/tool_eval.json`** (tool-selection accuracy).
+- **`benchmarking/generate_*_doc.py`** — turn those JSON results into the Hebrew reports
+  (**`output/GPT5.4-mini_Testing_Validation_v2.docx`**). Every number in the report is sourced
+  from a real run — nothing is hand-written.
+
+The **result** files (`*.json`, `.docx`) are committed so you can read the findings without
+running anything. To regenerate, the benchmark scripts need a valid `ANTHROPIC_API_KEY` (and
+`OPENAI_API_KEY` for the GPT side) in `local.env`, since they call the live models.

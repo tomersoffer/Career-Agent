@@ -991,7 +991,7 @@ add_par(doc, "הפוטנציאל החיובי משמעותי — כלי תומך
 add_spacer(doc, 10)
 add_par(doc, "— סוף התיעוד —", color=GREY, size=10)
 
-# write into the project/ deliverables folder (relative to this script in claude/)
+# write into the project/ deliverables folder (relative to this script in benchmarking/)
 _here = os.path.dirname(os.path.abspath(__file__))
 out = os.path.normpath(os.path.join(_here, "..", "project", "Project_Data_Report.docx"))
 doc.save(out)

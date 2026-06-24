@@ -3,7 +3,7 @@
 Generates the Hebrew (.docx) "Testing & Validation" report for the GPT-5.4-mini
 AGENTIC TOOL-CALLING loop (agent_loop.py) of the Smart Career Navigator. RTL.
 All numbers/traces come from real runs (tool_eval.json + traces_agent.json),
-produced by claude/run_traces_agent.py. Nothing is hand-written.
+produced by benchmarking/run_traces_agent.py. Nothing is hand-written.
 """
 import os, json, math
 from docx import Document
@@ -305,7 +305,7 @@ add_par(doc, "סך הכול: %d/%d בחירות-כלי נכונות (%d%%)." % (
         EVAL["passed"], EVAL["n"], round(100 * EVAL["passed"] / EVAL["n"])),
         space_before=3, size=10, color=GREY)
 add_lead(doc, "שחזור")
-add_code_block(doc, "python -X utf8 claude/run_traces_agent.py   # מפיק traces_agent.json + tool_eval.json")
+add_code_block(doc, "python -X utf8 benchmarking/run_traces_agent.py   # מפיק traces_agent.json + tool_eval.json")
 
 # ---------- SAVE ----------
 OUT = os.path.join(_OUT, "GPT5.4-mini_Testing_Validation.docx")
